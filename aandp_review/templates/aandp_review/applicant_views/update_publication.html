@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+  <h1> Edit publications for {{ applicant }}</h1>
+
+  <div class="row">  
+    <div class="col-8">
+      {% if publication.position_num == 1%}
+        Previous
+      {% else %}
+        <a href="{% url 'publication-update' publication.position_num|add:'-1' %}">Previous  </a>
+      {% endif %} |
+      
+      {% if publication.position_num == total_publications %}
+        Next
+      {% else %}
+        <a href="{% url 'publication-update' publication.position_num|add:1 %}">Next</a>
+      {% endif %}
+    </div>
+    <div class="col-2">
+      {{publication.position_num}} of {{total_publications}}
+    </div>
+  </div>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Publications submitted by {{applicant }} </title>{% endblock %}
+
+{% block content %}
+<h1>Modify Publications</h1>
+<p>{{applicant}} has {{applicant.publication_set.count}} publications</p>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Publication Type</th>
+        <th scope="col">Author Position</th>
+        <th scope="col">Percent Contribution</th>
+        <th scope="col">Score</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+
+        
+        {% for assessed_publication in assessed_publications %}
+        <tr>
+            <th scope="row">{{assessed_publication.publication.position_num}}</th>
+            <td class="text-truncate"> <a href="{% url 'assessment-update' assessed_publication.id %}">{{assessed_publication.publication.pub_title}}</a> </td>
+            <td> {{assessed_publication.publication.publication_type}} </td>
+            <td> {{assessed_publication.publication.author_position}} </td>
+            <td> {{assessed_publication.publication.percent_contribution}} </td>
+            <td> {{assessed_publication.score}} </td>
+          </tr>
+        {% endfor %}     
+    </tbody>
+  </table>
+  
+    <a name="" id="" class="btn btn-primary" href="{% url 'table-of-scores' %}" role="button">Generate Table of Scores</a>
+
+
+  
+
+  
+
+  
+  
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1> Assess publications for {{ applicant }}</h1>
+
+  <div class="row">  
+    <div class="col-8">
+      {% if assessed_publication.publication.position_num == 1 %}
+        Previous
+      {% else %}
+        <a href="{% url 'assessment-update' assessed_publication.publication.position_num|add:'-1' %}">Previous  </a>
+      {% endif %} |
+      
+      {% if assessed_publication.publication.position_num == total_assessments %}
+        Next
+      {% else %}
+        <a href="{% url 'assessment-update' assessed_publication.publication.position_num|add:1 %}">Next</a>
+      {% endif %}
+    </div>
+    <div class="col-2">
+      {{assessed_publication.publication.position_num}} of {{total_assessments}}
+    </div>
+  </div>
+
+
+  
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <th scope="row">Publication Title</th>
+        <td> {{assessed_publication.publication.pub_title}} </td>
+      </tr>
+      <tr>
+        <th scope="row">Publication Type</th>
+        <td> {{assessed_publication.publication.publication_type}} </td>
+      </tr>
+      <tr>
+        <th scope="row">Abstract</th>
+        <td> {{assessed_publication.publication.abstract}} </td>
+      </tr>
+      <tr>
+        <th scope="row">Percentage Contribution</th>
+        <td> {{assessed_publication.publication.percent_contribution}} </td>
+      </tr>
+      <tr>
+        <th scope="row">Document Link</th>
+        <td> <a href="{{assessed_publication.publication.document_path}}">{{assessed_publication.publication.document_path}}</a> </td>
+      </tr>
+
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}

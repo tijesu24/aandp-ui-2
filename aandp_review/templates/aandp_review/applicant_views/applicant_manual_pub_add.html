@@ -1,0 +1,100 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>{{applicant }}: add publications </title>{% endblock %}
+
+{% block content %}
+<h1>Modify Publications</h1>
+<p>You have {{applicant.publication_set.count}} publications</p>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Publication Type</th>
+        <th scope="col">Author Position</th>
+        <th scope="col">Percent Contribution</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        
+        {% for publication in applicant.publication_set.all|dictsort:"position_num"  %}
+        <tr>
+            <th scope="row">{{publication.position_num}}</th>
+            <td class="text-truncate"> <a href="{% url 'publication-update' publication.id %}">{{publication.pub_title}}</a> </td>
+            <td> {{publication.publication_type}} </td>
+            <td> {{publication.author_position}} </td>
+            <td> {{publication.percent_contribution}} </td>
+          </tr>
+        {% endfor %}     
+    </tbody>
+  </table>
+
+  
+  <!-- Button trigger modal -->
+  <a href="{% url 'publication-create'%}">Add publication</a>
+  
+
+  
+  <!-- Modal -->
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="mb-3">
+              <label for="titleInput" class="form-label">Publication Title</label>
+              <input type="text" class="form-control" id="titleInput" >
+            </div>
+
+            <div class="mb-3">
+              <label for="abstractInput" class="form-label">Abstract</label>
+              <textarea rows="3" class="form-control" id="abstractInput" ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="pubTypeInput" class="form-label">Publication Type</label>
+              <select class="form-select" aria-label="Publication type select">
+                <option selected>Select...</option>                
+                {% for publication_type in PUBLICATION_TYPES  %}
+                <option value=" {{publication_type.0}} "> {{publication_type.1}} </option>
+                {% endfor %}
+                  
+              </select></div>
+
+              <div class="mb-3">
+                <label for="titleInput" class="form-label">Percentage Contribution</label>
+                <input type="text" class="form-control" id="titleInput" >
+              </div>
+  
+              <div class="mb-3">
+                <label for="titleInput" class="form-label">Author position</label>
+                <input type="text" class="form-control" id="titleInput" >
+              </div>
+
+              <div class="mb-3">
+                <label for="formFile" class="form-label">Publication document</label>
+                <input class="form-control" type="file" id="formFile">
+              </div>
+
+              <div class="mb-3">
+                <label for="titleInput" class="form-label">Citation text</label>
+                <textarea readonly row="3" class="form-control" id="titleInput" ></textarea>
+              </div>
+  
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

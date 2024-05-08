@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Assessor List</h1>
+  {% if obj_list.count %}
+  <ul>
+    {% for assessor in obj_list %}
+      <li>
+        <a href="{% url 'assessor' assessor.pk %}">{{ assessor.first_name }} {{assessor.last_name}}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no assessors registered.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.pylintArgs": [
+        "--django-settings-module=aandp.settings"
+    ],
+    "python.analysis.typeCheckingMode": "basic"
+}

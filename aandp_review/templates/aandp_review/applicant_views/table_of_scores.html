@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Table of Scores</h1>
+  {% if assessed_publications %}
+  
+    <div class="table-responsive-md pe-4">
+      <table class="table ">
+          <thead class="table-primary">
+              <tr>
+                  <th scope="col">Publication Title</th>
+                  <th scope="col">Author Position</th>
+                  <th scope="col">Percent Contribution</th>
+                  <th scope="col">Maximum score</th>
+                  <th scope="col">Normalised %</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Weighted score</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for assessment in assessed_publications %}
+              <tr class="">
+                  <td scope="row">{{ assessment.publication.pub_title }}</td>
+                  <td>{{ assessment.publication.author_position }}</td>
+                  <td>{{ assessment.publication.percent_contribution }}</td>
+                  <td>{{ additional_columns|get_item:assessment.id|get_item:"maximum_score" }}</td>
+                  <td>{{ additional_columns|get_item:assessment.id|get_item:"normalised_percent" }}</td>
+                  <td>{{ assessment.score }}</td>
+                  <td>{{ additional_columns| get_item:assessment.id| get_item:"weighted_score" }}</td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <td scope="row"><strong>TOTAL</strong></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ total_row| get_item:"total_weighted" }}</td>
+
+              </tr>
+          </tbody>
+      </table>
+    </div>
+      
+  {% else %}
+    <p>There are no assessments for this applicant. Go to <a href=" {% url 'assessed-applicant' applicant.id %} ">applicants list</a> </p>
+  {% endif %}
+{% endblock %}

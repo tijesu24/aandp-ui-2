@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1> Add from APCV Maker</h1>
+
+  <form class="row g-3 needs-validation" novalidate action="{% url 'text-added-from-apcvmaker' %}" method="post">
+    <div class="mb-3">
+        <label for="docFile" class="form-label">Upload the APCV Maker printout</label>
+        <input class="form-control" type="file" id="docFile">
+      </div>
+      <i class="fa fa-quote-left" aria-hidden="true">--OR--</i>
+    <div class="col-md-6">
+        <label for="paste_area" class="form-label">Paste the document here</label>
+        <textarea class="form-control" id="paste_area" rows="20"></textarea>    
+    </div>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Submit form</button>
+    </div>
+  </form>
+
+    
+{% endblock %}
