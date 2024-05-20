@@ -1,0 +1,55 @@
+{% extends "base_generic.html" %}
+{% block title %}<title>{{ applicant }}</title>{% endblock %}
+{% block content %}
+  <h1>Welcome {{ applicant }}</h1>
+  You are applying for {{ applicant.position_applying_to }} in promotion year, {{ applicant.promotion_year }}
+  <h2>Publications</h2>
+  <p>You have {{ publications.count }} publication{{ publications.count|pluralize }}</p>
+  <p>Select how you want to add your publications</p>
+  <ul>
+    <li>
+      <a href="{% url 'form-apcvmaker-add' %}">APCVMaker printout</a>
+    </li>
+    <li>
+      <a href="{% url 'publication-list' %}">Add Manually</a>
+    </li>
+  </ul>
+  <div class="col-md-8">
+    {% for publication in publications %}
+      <div class="card mb-4">
+        <!--Lead Card-->
+        <div class="card-body">
+          <div class="card-title">{{ publication.pub_title }}</div>
+          <p class="card-text">
+            This starter template is an attempt to replicate the default Ghost theme "Casper"
+            using Tailwind CSS and vanilla Javascript.
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <ul id="sortable">
+    <li class="ui-state-default">
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1
+    </li>
+    <li class="ui-state-default">
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2
+    </li>
+    <li class="ui-state-default">
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3
+    </li>
+    <li class="ui-state-default">
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4
+    </li>
+    <li class="ui-state-default">
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5
+    </li>
+    <li class="ui-state-default">
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6
+    </li>
+    <li class="ui-state-default">
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7
+    </li>
+  </ul>
+  <!--/Lead Card-->
+{% endblock %}

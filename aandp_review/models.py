@@ -13,8 +13,8 @@ class Applicant(models.Model):
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    user = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, blank=True)
+    # user = models.ForeignKey(
+    #     User, on_delete=models.SET_NULL, null=True, blank=True)
 
     YEARS = [(str(x), str(x)) for x in range(2016, datetime.now().year+1)]
 
@@ -58,7 +58,7 @@ class Publication(models.Model):
     # TODO: Might need to adjust this
 
     applicant = models.ForeignKey(
-        Applicant, on_delete=models.RESTRICT, null=True)
+        Applicant, on_delete=models.RESTRICT, null=True, related_name="publications")
 
     pub_title = models.CharField(max_length=150)
     abstract = models.TextField(blank=True)
@@ -120,7 +120,7 @@ class AssessedPublication(models.Model):
         Applicant, on_delete=models.RESTRICT, null=True)
     publication = models.ForeignKey(
         Publication, on_delete=models.RESTRICT, null=True)
-    score = models.DecimalField(decimal_places=1, max_digits=3, default=0)
+    score = models.DecimalField(decimal_places=1, max_digits=3)
     review = models.TextField()
 
     def __str__(self):

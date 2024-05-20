@@ -3,5 +3,6 @@
     "python.linting.pylintArgs": [
         "--django-settings-module=aandp.settings"
     ],
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "liveServer.settings.port": 5501
 }
